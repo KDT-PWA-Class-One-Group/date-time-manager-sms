@@ -1,6 +1,6 @@
 class CustomDate {
 
-  // ! 어떤 인자도 받을 수 있도록 한다.
+  // ? 어떤 인자도 받을 수 있도록 한다.
   constructor(...args) {
     this.maker = args
   }
@@ -18,6 +18,16 @@ class CustomDate {
       utcDate = new Date(sanitizedString)
     } else {
       // * 3번 케이스: 숫자형 인자가 전달된 경우 (연도, 월, 일 등)
+      // ! 인자 길이 체크 (연도, 월, 일, 시, 분, 초 -> 최대 6개 인자)
+      if (value.length > 6) {
+        throw new Error("최대 6개의 인자(연도, 월, 일, 시, 분, 초)만 사용 가능합니다.")
+      }
+
+      // ! 모든 인자가 숫자 타입이어야 함
+      if (!value.every(item => typeof item === "number")) {
+        throw new Error("모든 인자는 숫자여야 합니다.")
+      }
+
       // ? 월은 0부터 시작하므로 1 감소
       const dateFilters = value.map((item, idx) => (idx === 1 ? Number(item) - 1 : Number(item))) 
       utcDate = new Date(...dateFilters)
@@ -38,5 +48,5 @@ console.log(date.getFullYear())
 console.log(date.getMonth())
 console.log(date.getDate())
 
-const cd = new CustomDate(2024, 12, 11)
+const cd = new CustomDate(2024, "12", 11, 11, 11, 11 )
 console.log(cd.maker)
