@@ -42,10 +42,40 @@ class CustomDate {
   }
 
   
+  get day () { // ? 요일의 index
+    return this.#date.getDay()
+  }
+  
+  set date (value) {
+    this.#date.setDate(value)
+  }
+  get date () { // * 일
+    return this.#date.getDate()
+  }
+  set month (value) {
+    this.#date.setMonth(value - 1)
+  }
+  get month () { // * 월
+    return this.#date.getMonth() + 1
+  }
+  set year (value) {
+    this.#date.setFullYear(value)
+  }
+  get year () { // * 년
+    return this.#date.getFullYear()
+  }
 
 }
 
 const date = new Date(2023, 12, 11)
 
 const cd = new CustomDate(2024, 12, 11)
+cd.date = 1
+cd.month = 10
+cd.year = 2023
 console.log(cd.maker)
+// console.log(cd.maker)
+// console.log(cd.year)
+// console.log(cd.month)
+// console.log(cd.date)
+// console.log(cd.day)
