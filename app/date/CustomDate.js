@@ -1,5 +1,5 @@
 class CustomDate {
-
+  #date
   // ? 어떤 인자도 받을 수 있도록 한다.
   constructor(...args) {
     this.maker = args
@@ -34,19 +34,18 @@ class CustomDate {
     }
 
     // ? UTC 기준 시간을 KST로 변환
-    this._date = new Date(utcDate.getTime() + KOREAN_TIME_OFFSET)
+    this.#date = new Date(utcDate.getTime() + KOREAN_TIME_OFFSET)
   }
 
   get maker() {
-    return this._date // * KST 변환된 날짜 반환
+    return this.#date // * KST 변환된 날짜 반환
   }
+
+  
+
 }
 
 const date = new Date(2023, 12, 11)
-console.log(date.toUTCString())
-console.log(date.getFullYear())
-console.log(date.getMonth())
-console.log(date.getDate())
 
-const cd = new CustomDate(2024, "12", 11, 11, 11, 11 )
+const cd = new CustomDate(2024, 12, 11)
 console.log(cd.maker)
